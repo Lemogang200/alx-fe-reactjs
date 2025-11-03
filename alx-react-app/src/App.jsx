@@ -6,6 +6,7 @@ import WelcomeMessage from './components/WelcomeMessage.jsx'
 import Header from './Header.jsx'
 import MainContent from './MainContent.jsx'
 import Footer from './Footer.jsx'
+import UserProfile from './components/UserProfile.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,10 @@ function App() {
       <Header /> 
       <MainContent />
       <Footer />
+      <UserProfile
+      name="Lemogang"
+      age="30"
+      bio="Loves learning"/>
       <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
@@ -37,7 +42,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
