@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <BrowserRouter>
-      <div style={{ fontFamily: "Arial, sans-serif" }}>
+      <div style={{ fontFamily: "Arial, sans-serif",justifyContent: "center" }}>
         <Navbar />
 
         <Routes>
