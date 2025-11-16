@@ -3,7 +3,15 @@ import { create } from "zustand";
 const useRecipeStore = create((set, get) => ({
   recipes: [],
 
-  // FAVORITES
+  searchTerm: "",
+  filteredRecipes: [],
+
+  setSearchTerm: (term) => {
+    set({ searchTerm: term });
+    get().filterRecipes();
+  },
+
+   // FAVORITES
   favorites: [],
   addFavorite: (id) =>
     set((state) => ({
@@ -18,7 +26,7 @@ const useRecipeStore = create((set, get) => ({
     })),
 
   // RECOMMENDATIONS
-  recommendations: [],
+   recommendations: [],
   generateRecommendations: () =>
     set((state) => {
       if (state.favorites.length === 0) {
@@ -45,6 +53,60 @@ const useRecipeStore = create((set, get) => ({
       });
 
       return { recommendations: recommended };
+    }),
+    
+  filterRecipes: () =>
+    set((state) => ({
+      filteredRecipes: state.recipes.filter((recipe) => {
+        const term = state.searchTerm.toLowerCase();
+
+        return (
+          recipe.title.toLowerCase().includes(term) ||
+          recipe.description.toLowerCase().includes(term) ||
+          recipe.ingredients?.some((ing) =>
+            ing.toLowerCase().includes(term)
+          ) ||
+          String(recipe.time).includes(term) // match cooking time
+        );
+      })
+    })),
+
+  addRecipe: (newRecipe) =>
+    set((state) => {
+      const updated = [...state.recipes, newRecipe];
+
+      return {
+        recipes: updated,
+        filteredRecipes: get().searchTerm ? updated.filter((r) =>
+          r.title.toLowerCase().includes(get().searchTerm.toLowerCase())
+        ) : updated
+      };
+    }),
+
+  updateRecipe: (updatedRecipe) =>
+    set((state) => {
+      const updated = state.recipes.map((r) =>
+        r.id === updatedRecipe.id ? { ...r, ...updatedRecipe } : r
+      );
+
+      return {
+        recipes: updated,
+        filteredRecipes: get().searchTerm ? updated.filter((r) =>
+          r.title.toLowerCase().includes(get().searchTerm.toLowerCase())
+        ) : updated
+      };
+    }),
+
+  deleteRecipe: (id) =>
+    set((state) => {
+      const updated = state.recipes.filter((r) => r.id !== id);
+
+      return {
+        recipes: updated,
+        filteredRecipes: get().searchTerm ? updated.filter((r) =>
+          r.title.toLowerCase().includes(get().searchTerm.toLowerCase())
+        ) : updated
+      };
     }),
     setRecipes: (recipes) => set({ recipes, filteredRecipes: recipes }),
 }));
