@@ -7,8 +7,8 @@ const EditRecipeForm = ({ existingRecipe, onDone }) => {
   const [title, setTitle] = useState(existingRecipe.title || "");
   const [description, setDescription] = useState(existingRecipe.description || "");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     if (!title.trim()) return;
 
     updateRecipe({
@@ -36,7 +36,7 @@ const EditRecipeForm = ({ existingRecipe, onDone }) => {
       <textarea
         value={description}
         placeholder="Recipe Description"
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(event) => setDescription(event.target.value)}
         style={{ padding: "8px", minHeight: "100px", borderRadius: "4px", border: "1px solid #ccc" }}
       />
 
