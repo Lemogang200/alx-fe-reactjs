@@ -64,6 +64,7 @@ const useRecipeStore = create((set, get) => ({
         ) : updated
       };
     }),
+    setRecipes: (recipes) => set({ recipes, filteredRecipes: recipes }),
 }));
 
 export default useRecipeStore;
