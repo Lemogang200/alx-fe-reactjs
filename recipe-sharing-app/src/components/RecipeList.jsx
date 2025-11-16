@@ -1,31 +1,44 @@
-import {useRecipeStore} from "../recipeStore/useRecipeStore";
 import { Link } from "react-router-dom";
+import useRecipeStore from "../store/recipeStore";
 
 const RecipeList = () => {
-  const recipes = useRecipeStore((state) => state.recipes);
+  const recipes = useRecipeStore((state) =>
+    state.searchTerm ? state.filteredRecipes : state.recipes
+  );
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Recipe List</h2>
-
-      {recipes.length === 0 && <p>No recipes yet. Add one below!</p>}
+    <div>
+      {recipes.length === 0 && (
+        <p style={{ color: "#777" }}>No recipes found.</p>
+      )}
 
       {recipes.map((recipe) => (
         <div
           key={recipe.id}
           style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            marginBottom: "10px",
-            borderRadius: "5px",
+            padding: "12px",
+            border: "1px solid #ddd",
+            borderRadius: "6px",
+            marginBottom: "12px"
           }}
         >
-          <h3 style={{ margin: 0 }}>
-            <Link to={`/recipes/${recipe.id}`} style={{ textDecoration: "none", color: "#333" }}>
+          <h3>
+            <Link
+              to={`/recipes/${recipe.id}`}
+              style={{ textDecoration: "none", color: "#333" }}
+            >
               {recipe.title}
             </Link>
           </h3>
-          <p>{recipe.description}</p>
+
+          <p style={{ color: "#666" }}>{recipe.description}</p>
+
+          <p style={{ fontSize: "14px", color: "#999" }}>
+            Ingredients: {recipe.ingredients?.join(", ")}
+          </p>
+          <p style={{ fontSize: "14px", color: "#999" }}>
+            Time: {recipe.time} min
+          </p>
         </div>
       ))}
     </div>
