@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { getUser } from '../services/githubService.js';
+import { fetchUserData, getUser } from '../services/githubService.js';
 
 
-function SearchBar({ setUser }) {
+function Search({ setUser }) {
 const [input, setInput] = useState('');
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
@@ -16,7 +16,7 @@ setLoading(true);
 setError(null);
 setUser(null);
 
-const data = await getUser(input);
+const data = await fetchUserData(input);
 
 if (!data) {
 setError("login", "Looks like we cant find the user");
