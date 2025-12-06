@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getUser } from '../services/githubServices.js';
+import { getUser } from '../services/githubService.js';
 
 
 function SearchBar({ setUser }) {
