@@ -75,6 +75,16 @@ return (
     <img src={user.avatar_url} width="100" alt="Avatar" />
     {loading && <p className="text-center mt-4">Loading...</p>}
     {error && <p className="text-center mt-4 text-red-600">{error}</p>}
+
+    {users.map((user)=>(
+            <div key={user.id} className="bg-white shadow p-4 rounded-lg">
+                <img src={user.avatar_url} className="w-20 h-20 rounded-full mx-auto" />
+                <h2 className="text-center mt-2 font-semibold">{user.login}</h2>
+                <p className='text-center text-blue-600'>
+                    <a href={user.html_url} target="_blank">View Profile</a>
+                </p>
+            </div>
+        ))}
 </div>
 );
 }
