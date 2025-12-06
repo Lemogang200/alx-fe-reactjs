@@ -4,7 +4,7 @@ import axios from 'axios';
 const API_BASE = 'https://api.github.com/users/';
 
 
-export async function getUser(username) {
+export async function fetchUserData(username) {
     try {
         const res = await axios.get(API_BASE + username, {
             headers: {
