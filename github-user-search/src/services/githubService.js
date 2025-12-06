@@ -1,11 +1,21 @@
 import axios from 'axios';
 
 
-const API_BASE = 'https://api.github.com/users/';
+const API_BASE = 'https://api.github.com/search/users?q=${query}';
 
 
 export async function fetchUserData(username) {
     try {
+        let query = '';
+        if (username) {
+            query += `${username} in:login`;
+        }
+        if (location) {
+            query += `location:${location}`;
+        }
+        if (minRepos) {
+            query += `repos:>${minRepos}`; 
+        }
         const res = await axios.get(API_BASE + username, {
             headers: {
                 Authorization: `Bearer ${import.meta.env.VITE_APP_GITHUB_API_KEY || ''}`,
@@ -13,7 +23,7 @@ export async function fetchUserData(username) {
             });
             return res.data;
         } catch (error) {
-                console.error('User not found');
-                return null;
+                console.error('User not found', error);
+                return [];
             }
 }
