@@ -41,6 +41,7 @@ return (
         />
         <button type="submit">Search</button>
     </form>
+    <img src={user.avatar_url} width="100" alt="Avatar" />
     {loading && <p>Loading...</p>}
     {error && <p style={{ color: 'red' }}>{error}</p>}
 </div>
