@@ -19,7 +19,7 @@ setUser(null);
 const data = await getUser(input);
 
 if (!data) {
-setError('Login', 'Looks like we can\'t find the user.');
+setError("login", "Looks like we cant find the user");
 }
 else {
     setUser(data);
