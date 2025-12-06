@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import SearchBar from './components/SearchBar.jsx';
 
-
 function App() {
 const [user, setUser] = useState(null);
 
