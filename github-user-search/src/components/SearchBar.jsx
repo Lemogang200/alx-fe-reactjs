@@ -8,7 +8,8 @@ const [loading, setLoading] = useState(false);
 const [error, setError] = useState(null);
 
 
-const handleSearch = async () => {
+const handleSearch = async (e) => {
+e.preventDefault();
 if (!input) return;
 
 setLoading(true);
