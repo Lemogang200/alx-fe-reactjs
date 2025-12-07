@@ -4,7 +4,7 @@ import axios from 'axios';
 const API_BASE = 'https://api.github.com/search/users?q=${query}';
 
 
-export async function fetchUserData(username) {
+export async function advancedUserSearch(username) {
     try {
         let query = '';
         if (username) {
