@@ -19,7 +19,7 @@ export default function RecipeDetail() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto p-6 shadow-lg bg-white rounded-lg">
       <Link
         to="/"
         className="text-blue-500 hover:underline mb-4 inline-block"
