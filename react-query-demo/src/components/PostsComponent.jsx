@@ -1,6 +1,4 @@
-import { useQuery } from "react-query";
 import { useQuery } from "@tanstack/react-query";
-
 
 const fetchPosts = async () => {
   const response = await fetch(
@@ -21,7 +19,23 @@ export default function PostsComponent() {
     isError,
     error,
     refetch,
-  } = useQuery("posts", fetchPosts);
+    isFetching,
+  } = useQuery({
+    queryKey: ["posts"],
+    queryFn: fetchPosts,
+
+    // ✅ Data is considered fresh for 1 minute
+    staleTime: 1000 * 60,
+
+    // ✅ Cache stays in memory for 5 minutes after unmount
+    cacheTime: 1000 * 60 * 5,
+
+    // ✅ Disable auto-refetch when switching browser tabs
+    refetchOnWindowFocus: false,
+
+    // ✅ Keep old data while refetching
+    keepPreviousData: true,
+  });
 
   if (isLoading) {
     return <p className="p-6">Loading posts...</p>;
@@ -43,10 +57,16 @@ export default function PostsComponent() {
 
       <button
         onClick={refetch}
-        className="mb-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="mb-4 bg-blue-600 text-white px-4 py-2 rounded"
       >
         Refetch Posts
       </button>
+
+      {isFetching && (
+        <p className="text-sm text-gray-500 mb-2">
+          Updating data...
+        </p>
+      )}
 
       <ul className="space-y-3">
         {data.slice(0, 10).map((post) => (
