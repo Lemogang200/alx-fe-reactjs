@@ -14,6 +14,15 @@ export default function RegistrationForm() {
       setError("All fields are required");
       return;
     }
+    if (!email) {
+      setError("This field is required");
+      return;
+    }
+    if (!password) {
+      setError("This field is required");
+      return;
+    }
+    
 
     setError("");
 
