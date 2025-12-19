@@ -5,6 +5,7 @@ import Profile from "./components/Profile";
 import ProfileDetails from "./components/ProfileDetails";
 import ProfileSettings from "./components/ProfileSettings";
 import Post from "./components/Post";
+import BlogPost from "./components/BlogPost";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -15,13 +16,14 @@ function App() {
           <Link to="/">Home</Link>
           <Link to="/profile">Profile</Link>
           <Link to="/posts/1">Post 1</Link>
+          <Link to="/blog/1">Blog 1</Link>
         </nav>
 
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
 
-          {/* ✅ Protected Route */}
+          {/* ✅ Protected Profile Route */}
           <Route
             path="/profile"
             element={
@@ -30,13 +32,14 @@ function App() {
               </ProtectedRoute>
             }
           >
-            {/* ✅ Nested Routes */}
+            {/* Nested Profile Routes */}
             <Route path="details" element={<ProfileDetails />} />
             <Route path="settings" element={<ProfileSettings />} />
           </Route>
 
-          {/* ✅ Dynamic Route */}
+          {/* ✅ Dynamic Routes */}
           <Route path="/posts/:id" element={<Post />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
         </Routes>
       </div>
     </BrowserRouter>
