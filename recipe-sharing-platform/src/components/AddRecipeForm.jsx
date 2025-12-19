@@ -70,7 +70,7 @@ export default function AddRecipeForm() {
             className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.title && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="text-red-500 text-sm text-md mt-1">
               {errors.title}
             </p>
           )}
